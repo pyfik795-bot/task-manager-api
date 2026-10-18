@@ -10,14 +10,14 @@ try :
     port = 443
 
 
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.settimeout(5)
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock :
+        sock.settimeout(5)
 
 
-    start = time.perf_counter()
-    res = sock.connect_ex((ip, port))
-    end = time.perf_counter()
-    elapsed = (end - start) * 1000
+        start = time.perf_counter()
+        res = sock.connect_ex((ip, port))
+        end = time.perf_counter()
+        elapsed = (end - start) * 1000
 
 
     print("ip", ip)
@@ -30,7 +30,7 @@ try :
     else:
         print('fail')
 
-    sock.close()
+
 except socket.error as msg:
     print(f'ошибка {msg}')
 
