@@ -1,6 +1,7 @@
 import uvicorn
 from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi import HTTPException
 
 app=FastAPI(title='task manager')
 
@@ -37,3 +38,13 @@ def create_task(task: Task):
 
     tasks.append(new_task)
     return new_task
+
+@app.delete('/tasks/{task_id}')
+def delete_task(task_id: int):
+    for task in tasks:
+        if task['id'] == task_id:
+            tasks.remove(task)
+            return {'message': 'задача удалена'}
+
+        raise HTTPException(status_code=404, detail="Task not found")
+
