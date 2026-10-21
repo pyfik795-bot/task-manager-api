@@ -38,7 +38,7 @@ while True:
 
 
                 start = time.perf_counter()
-                res = sock.connect_ex((ip, port))
+                res_port = sock.connect_ex((ip, port))
                 end = time.perf_counter()
                 elapsed = (end - start) * 1000
 
@@ -48,11 +48,11 @@ while True:
             print('port', port)
             print(f'time connect {elapsed:.2f} мс ')
 
-            if res == 0:
+            if res_port == 0:
                 status = "success"
                 success_connect += 1
             else:
-                print(get_error_message(res))
+                print(get_error_message(res_port))
                 status = "fail"
 
 
@@ -71,7 +71,8 @@ while True:
 
             with open('monitor.log','a',encoding='utf-8') as file :
                 file.write(
-                    f'{datetime.now()} | host={host} | error={msg}\n'
+                    f'{datetime.now()} | host={host} | error={msg} | '
+                    f'status=ERROR | reason=DNS/Socket error: {msg}\n'
                 )
     print(f'доступно, {success_connect}\n'
           f'недоступно, {fail_connect}\n')
