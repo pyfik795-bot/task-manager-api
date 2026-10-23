@@ -47,6 +47,9 @@ while True:
                 status = "fail"
                 fail_connect += 1
 
+            # выводим рекомендацию
+            print(f"статус для {i[0]}", check_status(status))
+
             # записываем в файл
             with open('monitor.log','a',encoding='utf-8') as file :
                 file.write(
