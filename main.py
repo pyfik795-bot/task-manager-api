@@ -1,4 +1,4 @@
-import socket,time, errno, requests
+import socket, time
 from datetime import datetime
 from share import sites, get_error_message, check_http_status, check_status
 
